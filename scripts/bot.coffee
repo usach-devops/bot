@@ -99,14 +99,14 @@ module.exports = (robot) ->
    #R9
   robot.hear /avg1/i, (msg) ->
     child_process.exec 'sh avg1.sh', (error, stdout, stderr) ->
-      msg.send(stdout)
+      msg.send("Promedio Edad Personas que no realizan deporte  durante la semana = #{stdout}")
 
      #R9
   robot.hear /avg2/i, (msg) ->
     child_process.exec 'sh avg2.sh', (error, stdout, stderr) ->
-      msg.send(stdout)
+      msg.send("Promedio edad, hacen deporte más de 3 veces a la semana y son mayores a 40 = #{stdout}")
 
    #R9
   robot.hear /avg3/i, (msg) ->
     child_process.exec 'sh avg3.sh', (error, stdout, stderr) ->
-      msg.send(stdout)
+      msg.send("Promedio edad, hacen deporte más de 3 veces a la semana y son mujeres = #{stdout}")
