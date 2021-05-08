@@ -97,34 +97,16 @@ module.exports = (robot) ->
 
 
    #R9
-  robot.hear /avg1/i, (res) ->
-    child_process.exec 'curl -XGET --header \'Content-Type: application/json\' http://35.223.179.2:9200/sport/_search -d '{
-        "query": {
-    "bool": {
-      "must": [
-        {
-          "range": {
-            "vecesporsemana": {
-              "gt": 3
-            }
-          }
-        },
-        {
-          "range": {
-            "edad": {
-              "gt": 40
-            }
-          }
-        }
-      ]
-    }
-  },
-  "aggs": {
-    "avg_edad": {
-      "avg": {
-        "field": "edad"
-      }
-    }
-  }
-}'  | jq '.aggregations'.avg_edad.value', (error, stdout, stderr) ->
+  robot.hear /avg1/i, (msg) ->
+    child_process.exec 'sh avg1.sh', (error, stdout, stderr) ->
+      msg.send(stdout)
+
+     #R9
+  robot.hear /avg2/i, (msg) ->
+    child_process.exec 'sh avg2.sh', (error, stdout, stderr) ->
+      msg.send(stdout)
+
+   #R9
+  robot.hear /avg3/i, (msg) ->
+    child_process.exec 'sh avg3.sh', (error, stdout, stderr) ->
       msg.send(stdout)
